@@ -19,7 +19,7 @@ class TicTacToe extends CI_Controller
         // this is the most common scenario
         if ($validation_result === TRUE)
         {
-            goToPlay();
+            $this->_go_to_play();
             return;
         }
 
@@ -58,6 +58,12 @@ class TicTacToe extends CI_Controller
         $msg = 'Both players must have names!';
         $data['error_message'] = $msg;
         $this->load->view('templates/error', $data);
+    }
+
+    private function _go_to_play()
+    {
+        $this->load->helper('url');
+        redirect('tic-tac-toe/play');
     }
 
     public function play()
