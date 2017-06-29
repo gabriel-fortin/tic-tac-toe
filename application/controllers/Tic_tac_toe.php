@@ -1,6 +1,6 @@
 <?php
 
-class TicTacToe extends CI_Controller
+class Tic_tac_toe extends CI_Controller
 {
 
     public function __construct()
