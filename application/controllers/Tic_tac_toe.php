@@ -7,14 +7,14 @@ class Tic_tac_toe extends CI_Controller
     {
         parent::__construct();
         $this->load->library('session');
+        $this->load->helper('form');
+        $this->load->helper('url');
         $this->load->model('challenge_model');
         $this->load->model('game_model');
     }
 
     public function begin()
     {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
 
         $validation_result = $this->_perform_validation();
 
@@ -71,13 +71,11 @@ class Tic_tac_toe extends CI_Controller
         $challenge_id = $this->challenge_model->create_challenge($player1, $player2);
         $this->session->set_userdata('ch_id', $challenge_id);
 
-        $this->load->helper('url');
         redirect('tic-tac-toe/play');
     }
 
     public function play()
     {
-        // TODO: import helpers/libraries
 
         $data['title'] = "Play";
         $this->load->view('templates/header', $data);
@@ -94,6 +92,6 @@ class Tic_tac_toe extends CI_Controller
         $data['recent_games'] = $recent_games;
         $this->load->view('ttt/play', $data);
 
-        $this->load->view('templates/footer', $data);
+        $this->load->view('templates/footer');
     }
 }
