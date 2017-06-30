@@ -6,6 +6,7 @@ class Tic_tac_toe extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('session');
     }
 
     public function begin()
@@ -62,6 +63,12 @@ class Tic_tac_toe extends CI_Controller
 
     private function _go_to_play()
     {
+        $player1 = $this->input->post('player1');
+        $player2 = $this->input->post('player2');
+
+        $challenge_id = $this->challenge_model->create_challenge($player1, $player2);
+        $this->session->set_userdata('ch_id', $challenge_id);
+
         $this->load->helper('url');
         redirect('tic-tac-toe/play');
     }
@@ -73,7 +80,7 @@ class Tic_tac_toe extends CI_Controller
         $data['title'] = "Play";
         $this->load->view('templates/header', $data);
 
-        // TODO: logic
+        $challenge_id = $this->session->userdata('ch_id');
 
         $this->load->view('ttt/play', $data);
 
