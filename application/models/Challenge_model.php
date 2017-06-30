@@ -7,6 +7,12 @@ class Challenge_model extends CI_Model
         $this->load->database();
     }
 
+    /**
+     * Creates a challenge (a sequence of games) and returns its id.
+     * @param $player1 string name of player
+     * @param $player2 string name of player
+     * @return int the id of the created challenge
+     */
     public function create_challenge($player1, $player2)
     {
         $data = array(
@@ -14,6 +20,8 @@ class Challenge_model extends CI_Model
             'player2' => $player2,
         );
 
+        // wrap in transaction to make sure the query gets
+        // the just inserted row (and not some other, added concurrently)
         $this->db->trans_start();
 
         // values are escaped automatically

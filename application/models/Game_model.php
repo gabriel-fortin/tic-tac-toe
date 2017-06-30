@@ -9,6 +9,14 @@ class Game_model extends CI_Model
         $this->load->database();
     }
 
+    /**
+     * Adds a game's result to the selected challenge. The game's result should
+     * be a string of 9 characters, each describing one cell of the board
+     * (beginning with cells for the first row, then the second, …)
+     * @param $challenge_id int id of the challenge the game is part of
+     * @param $board_string string a string describing the board
+     * @return bool the result of the DB operation
+     */
     public function add_game($challenge_id, $board_string)
     {
         $data = array(
@@ -19,6 +27,11 @@ class Game_model extends CI_Model
         return $this->db->insert('game', $data);
     }
 
+    /**
+     * Returns an array of board states for a few recent games.
+     * @param $challenge_id int id of the challenge for which to grab data
+     * @return array an array of strings representing a board's state
+     */
     public function get_recent_games($challenge_id)
     {
         $query = $this->db->query(
@@ -28,6 +41,7 @@ class Game_model extends CI_Model
                 ORDER BY timestamp DESC
                 LIMIT '.RECENT_GAMES_LIMIT);
 
+        // extract strings from query
         $board_strings = array();
         foreach ($query->result() as $row)
         {
