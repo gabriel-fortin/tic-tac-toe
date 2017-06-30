@@ -7,6 +7,8 @@ class Tic_tac_toe extends CI_Controller
     {
         parent::__construct();
         $this->load->library('session');
+        $this->load->model('challenge_model');
+        $this->load->model('game_model');
     }
 
     public function begin()
@@ -81,7 +83,15 @@ class Tic_tac_toe extends CI_Controller
         $this->load->view('templates/header', $data);
 
         $challenge_id = $this->session->userdata('ch_id');
+        $board_state = $this->input->post('board_state');
+        // if just finished a game then save the result
+        if ($board_state !== NULL)
+        {
+            $this->game_model->add_game($challenge_id, $board_state);
+        }
 
+        $recent_games = $this->game_model->get_recent_games($challenge_id);
+        $data['recent_games'] = $recent_games;
         $this->load->view('ttt/play', $data);
 
         $this->load->view('templates/footer', $data);
