@@ -25,11 +25,10 @@
                     col-lg-offset-3 col-lg-2">
             <h3>Recent games</h3>
             <?php
-                $this->load->view('ttt/board');
-                $this->load->view('ttt/board');
-                $this->load->view('ttt/board');
-                $this->load->view('ttt/board');
-                $this->load->view('ttt/board');
+                foreach ($recent_games as $game)
+                {
+                    $this->load->view('ttt/board', ['board_state' => $game]);
+                }
             ?>
             <div>
                 see all games →
