@@ -1,12 +1,5 @@
 
-<?php
-    if ( ! isset($additional_board_classes))
-    {
-        $additional_board_classes = "";
-    }
-?>
-
-<table class="board <?php echo $additional_board_classes ?>">
+<table class="board">
     <tr>
         <td>
             <div class="content left-edge top-edge">
