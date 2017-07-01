@@ -1,0 +1,48 @@
+
+body {
+    padding:20px;
+}
+
+table.board {
+    background: rgba(0, 0, 0, .2);
+    width: 90%;
+}
+td {
+    width: 33.33%;
+    position: relative;
+}
+td:after {
+    content: '';
+    display: block;
+    margin-top: 100%;
+    background: #ccc;
+}
+td .content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 3%;
+    background: white;
+}
+td .content img {
+    width: 100%;
+    height: 100%;
+}
+td .left-edge {
+    margin-left: 0;
+    padding-left: 3%;
+}
+td .right-edge {
+    margin-right: 0;
+    padding-right: 3%;
+}
+td .top-edge {
+    margin-top: 0;
+    padding-top: 3%;
+}
+td .bottom-edge {
+    margin-bottom: 0;
+    padding-bottom: 3%;
+}

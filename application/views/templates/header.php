@@ -7,6 +7,7 @@
         echo '<script type="text/javascript" src="' . $src . '"></script>'
     ?>
 
+    <?php echo link_tag('assets/css/style.css', 'stylesheet') ?>
 
     <?php echo link_tag('assets/css/font-awesome.css', 'stylesheet') ?>
 </head>
