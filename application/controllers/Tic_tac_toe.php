@@ -11,6 +11,7 @@ class Tic_tac_toe extends CI_Controller
         // TODO: load libraries/helpers/models only when they are needed? (performance?)
         $this->load->library('form_validation');
         $this->load->library('session');
+        $this->load->helper('html');
         $this->load->helper('form');
         $this->load->helper('url');
         $this->load->model('challenge_model');
