@@ -35,11 +35,11 @@ class Game_model extends CI_Model
     public function get_recent_games($challenge_id)
     {
         $query = $this->db->query(
-            'SELECT board_state
+            "SELECT board_state
                 FROM game
                 WHERE challenge_id='.$challenge_id.'
-                ORDER BY timestamp DESC
-                LIMIT '.RECENT_GAMES_LIMIT);
+                ORDER BY 'timestamp' DESC
+                LIMIT ".RECENT_GAMES_LIMIT);
 
         // extract strings from query
         $board_strings = array();
