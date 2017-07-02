@@ -22,7 +22,6 @@ class Game_model extends CI_Model
         $data = array(
             'challenge_id' => $challenge_id,
             'board_state' => $board_string,
-            'timestamp' => time(),
         );
         return $this->db->insert('game', $data);
     }
@@ -38,7 +37,7 @@ class Game_model extends CI_Model
         "SELECT board_state
                 FROM game
                 WHERE challenge_id=%d
-                ORDER BY 'timestamp' DESC
+                ORDER BY `timestamp` DESC
                 LIMIT %d",
                 $challenge_id,
                 RECENT_GAMES_LIMIT);
@@ -61,7 +60,7 @@ class Game_model extends CI_Model
 CREATE TABLE game (
     challenge_id int,
     board_state varchar(9) NOT NULL,
-    timestamp date NOT NULL,
+    timestamp timestamp NOT NULL,
     FOREIGN KEY(challenge_id)
         REFERENCES challenge(id)
         ON DELETE CASCADE
