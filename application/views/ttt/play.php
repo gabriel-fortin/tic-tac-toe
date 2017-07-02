@@ -12,7 +12,7 @@
                     col-lg-offset-1 col-lg-6">
             <h2>Play</h2>
             <?php
-                $this->load->view('ttt/board');
+                $this->load->view('ttt/board', ['clickable' => TRUE]);
             ?>
         </div>
 
@@ -26,7 +26,7 @@
             <?php
                 foreach ($recent_games as $game)
                 {
-                    $this->load->view('ttt/board', ['board_state' => $game]);
+                    $this->load->view('ttt/board', ['board_state' => $game, 'clickable' => FALSE]);
                 }
             ?>
             <div>

@@ -10,6 +10,11 @@
     <?php echo link_tag('assets/css/style.css', 'stylesheet') ?>
 
     <?php echo link_tag('assets/css/font-awesome.css', 'stylesheet') ?>
+
+    <?php
+        $src = base_url("assets/js/ttt.js");
+        echo '<script type="text/javascript" src="' . $src . '"></script>'
+    ?>
 </head>
 <body>
 

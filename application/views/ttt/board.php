@@ -2,10 +2,11 @@
 <?php
     if ( ! isset($board_state)) {
         // TODO: change to '_________'
-        $board_state = 'ooo_oxoxo';
+        $board_state = '_________';
     }
 
     $mapping = str_split($board_state);
+    unset($board_state);
     for ($i=0 ; $i<9 ; $i++)
     {
         switch ($mapping[$i])
@@ -20,8 +21,15 @@
                 $mapping[$i] = 'empty';
                 break;
         }
-        $format_string = '<img src="/assets/img/%s.svg" />';
-        $mapping[$i] = sprintf($format_string, $mapping[$i]);
+        if (isset($clickable) AND $clickable == TRUE)
+        {
+            $format_string = '<img src="/assets/img/%s.svg" onclick="cell_click(this, %d)" />';
+        }
+        else
+        {
+            $format_string = '<img src="/assets/img/%s.svg" />';
+        }
+        $mapping[$i] = sprintf($format_string, $mapping[$i], $i);
     }
     $pos = 0;
 ?>
