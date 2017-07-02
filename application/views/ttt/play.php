@@ -2,7 +2,6 @@
 
 <div class="container-fluid"
 >
-    container begin
 
     <div class="row">
         <!-- Play board -->
@@ -36,8 +35,5 @@
         </div>
 
     </div>
-
-    container end
-
 
 </div>

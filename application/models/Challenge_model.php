@@ -38,6 +38,9 @@ class Challenge_model extends CI_Model
         return $challenge_id;
     }
 
+    // I'm not taking care of removing unused 'challenge' entries because
+    // it's irrelevant from a UX point of view.
+
 }
 
 /*

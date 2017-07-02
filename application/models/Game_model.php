@@ -53,6 +53,9 @@ class Game_model extends CI_Model
         return $board_strings;
     }
 
+    // I'm not taking care of removing unused 'game' entries because
+    // it's irrelevant from a UX point of view.
+
 }
 
 /*
