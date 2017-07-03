@@ -6,7 +6,7 @@
     <circle
             cx="50" cy="50"
             r="35"
-            stroke="green"
+            stroke="#5bc0de"
             fill="transparent"
             stroke-width="7"
     />

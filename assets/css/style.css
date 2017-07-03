@@ -32,72 +32,74 @@ body {
 
 /* general board settings */
 table.board {
-    /* lines' color */
-    background: rgba(0, 0, 0, .2);
+    /* grid color */
+    background: rgba(0, 0, 0, .5);
     width: 100%;
 }
 
 
 /* make table cells square */
-td {
+table.board td {
     width: 33.33%;
     position: relative;
 }
-td:after {
+table.board td:after {
     content: '';
     display: block;
     margin-top: 100%;
-    background: #ccc;
 }
-td .content {
+table.board td > div {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    /* grid's thickness */
     margin: 3%;
+    /* cell's normal background */
     background: white;
 }
 
 
 /* tic-tac-toe symbols take whole cells */
-.board td .content img {
+table.board td > div > img {
     width: 100%;
     height: 100%;
 }
 
 
-/* remove edges of board table */
-.board td .left-edge {
+/* cover edges of board table */
+table.board td.left-edge > div {
     margin-left: 0;
-    padding-left: 3%;
+    padding-left: 3%;  /* must be same as grid's thickness */
 }
-.board td .right-edge {
+table.board td.right-edge > div {
     margin-right: 0;
-    padding-right: 3%;
+    padding-right: 3%;  /* must be same as grid's thickness */
 }
-.board td .top-edge {
+table.board td.top-edge > div {
     margin-top: 0;
-    padding-top: 3%;
+    padding-top: 3%;  /* must be same as grid's thickness */
 }
-.board td .bottom-edge {
+table.board td.bottom-edge > div {
     margin-bottom: 0;
-    padding-bottom: 3%;
-}
-
-/* next player's symbol */
-#next_player_symbol {
-    width: 40px;
-    height: 40px;
-    border: black solid 4px;
+    padding-bottom: 3%;  /* must be same as "grid's thickness" */
 }
 
 
-td.winning_cell div.content {
+/* highlight for winning cells */
+table.board td.winning_cell > div {
     background-image: url("/assets/img/gradient.svg");
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
     color: #77c791;
+}
+
+
+/* next player's symbol hint */
+#next_player_symbol {
+    width: 40px;
+    height: 40px;
 }
 

@@ -36,54 +36,36 @@
 
 <table class="board">
     <tr>
-        <td>
-            <div class="content left-edge top-edge">
-                <?php echo $mapping[$pos++]; ?>
-            </div>
+        <td class="left-edge top-edge">
+            <div> <?php echo $mapping[$pos++]; ?> </div>
         </td>
-        <td>
-            <div class="content top-edge">
-                <?php echo $mapping[$pos++]; ?>
-            </div>
+        <td class="top-edge">
+            <div class=""> <?php echo $mapping[$pos++]; ?> </div>
         </td>
-        <td>
-            <div class="content right-edge top-edge">
-                <?php echo $mapping[$pos++]; ?>
-            </div>
+        <td class="right-edge top-edge">
+            <div> <?php echo $mapping[$pos++]; ?> </div>
         </td>
     </tr>
     <tr>
-        <td>
-            <div class="content left-edge">
-                <?php echo $mapping[$pos++]; ?>
-            </div>
+        <td class="left-edge">
+            <div> <?php echo $mapping[$pos++]; ?> </div>
         </td>
         <td>
-            <div class="content">
-                <?php echo $mapping[$pos++]; ?>
-            </div>
+            <div> <?php echo $mapping[$pos++]; ?> </div>
         </td>
-        <td>
-            <div class="content right-edge">
-                <?php echo $mapping[$pos++]; ?>
-            </div>
+        <td class="right-edge">
+            <div> <?php echo $mapping[$pos++]; ?> </div>
         </td>
     </tr>
     <tr>
-        <td>
-            <div class="content left-edge bottom-edge">
-                <?php echo $mapping[$pos++]; ?>
-            </div>
+        <td class="left-edge bottom-edge">
+            <div> <?php echo $mapping[$pos++]; ?> </div>
         </td>
-        <td>
-            <div class="content bottom-edge">
-                <?php echo $mapping[$pos++]; ?>
-            </div>
+        <td class="bottom-edge">
+            <div> <?php echo $mapping[$pos++]; ?> </div>
         </td>
-        <td>
-            <div class="content right-edge bottom-edge">
-                <?php echo $mapping[$pos++]; ?>
-            </div>
+        <td class="right-edge bottom-edge" >
+            <div> <?php echo $mapping[$pos++]; ?> </div>
         </td>
     </tr>
 </table>
