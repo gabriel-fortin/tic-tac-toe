@@ -91,3 +91,13 @@ td .content {
     height: 40px;
     border: black solid 4px;
 }
+
+
+td.winning_cell div.content {
+    background-image: url("/assets/img/gradient.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #77c791;
+}
+
