@@ -84,3 +84,10 @@ td .content {
     margin-bottom: 0;
     padding-bottom: 3%;
 }
+
+/* next player's symbol */
+#next_player_symbol {
+    width: 40px;
+    height: 40px;
+    border: black solid 4px;
+}

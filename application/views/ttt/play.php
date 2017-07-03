@@ -8,6 +8,10 @@
                     col-xs-12
                     col-sm-offset-0 col-sm-8">
             <h2>Play</h2>
+
+            Next player:
+            <img src="/assets/img/empty.svg" id="next_player_symbol" name="next_player_symbol" />
+
             <?php
                 $this->load->view('ttt/board', ['clickable' => TRUE]);
             ?>
