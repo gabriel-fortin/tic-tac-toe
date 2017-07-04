@@ -13,33 +13,48 @@ class Game_model extends CI_Model
      * Adds a game's result to the selected challenge. The game's result should
      * be a string of 9 characters, each describing one cell of the board
      * (beginning with cells for the first row, then the second, …)
-     * @param $challenge_id int id of the challenge the game is part of
+     * @param $challenge_string string public id of the challenge the game is part of
      * @param $board_string string a string describing the board
      * @return bool the result of the DB operation
      */
-    public function add_game($challenge_id, $board_string)
+    public function add_game($challenge_string, $board_string)
     {
         $data = array(
-            'challenge_id' => $challenge_id,
+            'challenge_id' => $this->_challenge_id_for($challenge_string),
             'board_state' => $board_string,
         );
         return $this->db->insert('game', $data);
     }
 
+    private function _challenge_id_for($challenge_string)
+    {
+        $sql = sprintf(
+            "SELECT id
+                FROM challenge
+                WHERE string_id='%s'",
+            $challenge_string);
+        $query = $this->db->query($sql);
+        return $query->row()->id;
+    }
+
     /**
      * Returns an array of board states for a few recent games.
-     * @param $challenge_id int id of the challenge for which to grab data
+     * @param $challenge_string string public id of the challenge for which to grab data
      * @return array an array of strings representing a board's state
      */
-    public function get_recent_games($challenge_id)
+    public function get_recent_games($challenge_string)
     {
         $sql = sprintf(
         "SELECT board_state
                 FROM game
-                WHERE challenge_id=%d
+                WHERE challenge_id IN (
+                      SELECT id
+                      FROM challenge
+                      WHERE string_id = '%s'
+                )
                 ORDER BY `timestamp` DESC
                 LIMIT %d",
-                $challenge_id,
+                $challenge_string,
                 RECENT_GAMES_LIMIT);
         $query = $this->db->query($sql);
 

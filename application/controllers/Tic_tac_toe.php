@@ -11,6 +11,7 @@ class Tic_tac_toe extends CI_Controller
         // TODO: load libraries/helpers/models only when they are needed? (performance?)
         $this->load->library('form_validation');
         $this->load->library('session');
+        $this->load->helper('string');
         $this->load->helper('html');
         $this->load->helper('form');
         $this->load->helper('url');
@@ -65,13 +66,13 @@ class Tic_tac_toe extends CI_Controller
 
     private function _check_session()
     {
-        $challenge_id = $this->session->userdata('ch_id');
-        if ($challenge_id !== NULL)
+        $challenge_string = $this->session->userdata('challenge_string');
+        if ($challenge_string !== NULL)
         {
-            $play_link = anchor('tic-tac-toe/play', 'playing');
+            $play_link = anchor('tic-tac-toe/play/'.$challenge_string, 'current session');
             $msg = 'If you continue you will create a new session and current '
-                .'results will be lost.<br />'
-                .'Go to ' . $play_link . ' instead.';
+                .'results may be lost.<br />'
+                .'Here you\'ll find your ' . $play_link;
             $this->_add_error($msg);
         }
     }
@@ -110,37 +111,43 @@ class Tic_tac_toe extends CI_Controller
         $player1 = $this->input->post('player1');
         $player2 = $this->input->post('player2');
 
-        $challenge_id = $this->challenge_model->create_challenge($player1, $player2);
-        $this->session->set_userdata('ch_id', $challenge_id);
+
+
+        $challenge_string = $this->challenge_model->create_challenge($player1, $player2);
+        $this->session->set_userdata('challenge_string', $challenge_string);
 
         $this->session->keep_flashdata('last_error');
-        redirect('tic-tac-toe/play');
+        redirect('tic-tac-toe/play/'.$challenge_string);
     }
 
-    public function play()
+    public function play($challenge_string = NULL)
     {
-
-        if ($this->session->userdata('ch_id') === NULL)
+        if ($challenge_string === NULL)
         {
-            $msg = 'First, name your players!';
+            // try to get one from session
+            $challenge_string = $this->session->userdata('challenge_string');
+        }
+        if ($challenge_string === NULL)
+        {
+            $msg = 'Can\'t find your session, you must start anew';
             $this->session->set_flashdata('last_error', $msg);
             redirect('tic-tac-toe/begin');
         }
-
+        $data['challenge_string'] = $challenge_string;
 
         $data['title'] = "Play";
         $this->load->view('templates/header', $data);
 
-        $challenge_id = $this->session->userdata('ch_id');
         $board_state = $this->input->post('board_state');
         // if just finished a game then save the result
         if ($board_state !== NULL)
         {
-            $this->game_model->add_game($challenge_id, $board_state);
+            $this->game_model->add_game($challenge_string, $board_state);
         }
 
-        $recent_games = $this->game_model->get_recent_games($challenge_id);
+        $recent_games = $this->game_model->get_recent_games($challenge_string);
         $data['recent_games'] = $recent_games;
+
         $this->load->view('ttt/play', $data);
 
         $this->load->view('templates/footer');

@@ -20,7 +20,7 @@
             ?>
 
             <?php
-                echo form_open('tic-tac-toe/play', ['class' => 'invisible']);
+                echo form_open('tic-tac-toe/play/'.$challenge_string, ['class' => 'invisible']);
                 echo form_input('board_state', '', ['id' => 'board_transcription']);
                 echo form_submit('board_send', 'Board Submission');
                 echo form_close();
