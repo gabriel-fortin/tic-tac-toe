@@ -125,3 +125,11 @@ table.board td.winning_cell > div {
 .invisible * {
     display: none;
 }
+
+
+/* error messages on the 'begin' page */
+.error-message {
+    color: #d9534f;
+    margin: 10px 0px;
+    padding: 10px;
+}
