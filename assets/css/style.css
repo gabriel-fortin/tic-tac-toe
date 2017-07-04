@@ -117,3 +117,11 @@ table.board td.winning_cell > div {
 .text-right > span#winner_label {
     display: inline;
 }
+
+#board_transcription, #board_submit {
+    display: none;
+}
+
+.invisible * {
+    display: none;
+}
