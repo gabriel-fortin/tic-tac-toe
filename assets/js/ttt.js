@@ -2,42 +2,47 @@
  * Created by Gabriel Fortin
  */
 
-/* "window" is a better way to go since it is unobstrusive and is considered more standard. */
+const NEW_GAME_DELEAY = 1500;  // in ms
+
 window.onload = function() { prepare(); };
 
 function prepare() {
+    window.gameWinner = null;
     window.boardState = new Array(9).fill('_');
     window.nextSymbol = Math.random()<0.5 ? 'x' : 'o';
 
-    set_next_player_symbol(window.nextSymbol);
-    window.game_winner = null;
+    setNextPlayerSymbol(window.nextSymbol);
 }
 
-function cell_click(cell_img_tag, pos) {
-    if (window.game_winner !== null) return;
+// this function is referenced in 'board.php'
+function cellClick(cellImgTag, pos) {
+    // no moves when game finished
+    if (window.gameWinner !== null) return;
+    // no moves on occupied cells
     if (window.boardState[pos] !== '_') return;
 
-    var input_tag = document.getElementById('board_state');
+    var transcriptionTag = document.getElementById('board_transcription');
 
     // update internal board state
     window.boardState[pos] = window.nextSymbol;
-    input_tag.value = window.boardState.join('');
-    cell_img_tag.src = cell_img_tag.src.replace('empty', window.nextSymbol);
+    transcriptionTag.value = window.boardState.join('');
     window.nextSymbol = window.nextSymbol==='x' ? 'o' : 'x';
 
-    set_next_player_symbol(window.nextSymbol);
+    // update visual board state
+    cellImgTag.src = cellImgTag.src.replace('empty', window.nextSymbol);
+    setNextPlayerSymbol(window.nextSymbol);
 
-    window.game_winner = check_winner();
+    window.gameWinner = checkWinner();
 
-    if (window.game_winner !== null) {
-        var button = document.getElementsByName('board_submission')[0];
-        setTimeout(function() { button.click() }, 2000);
-        // TODO: show text about who won; use 'window.game_winner'
+    if (window.gameWinner !== null) {
+        var button = document.getElementsByName('board_send')[0];
+        setTimeout(function() { button.click() }, NEW_GAME_DELEAY);
+        // TODO: show text about who won; use 'window.gameWinner'
     }
 }
 
-function check_winner() {
-    var board_table = document
+function checkWinner() {
+    var boardTable = document
         .getElementsByClassName('play-section') [0]
         .getElementsByClassName('board') [0];
 
@@ -48,7 +53,7 @@ function check_winner() {
         if (brd[3*row] === '_') continue;
         if (brd[3*row] === brd[3*row+1] && brd[3*row] === brd[3*row+2]) {
             for (var i=0 ; i<3 ; i++) {
-                set_win_on(board_table, row, i);
+                setWinOn(boardTable, row, i);
             }
             return brd[3*row];
         }
@@ -59,7 +64,7 @@ function check_winner() {
         if (brd[col] === '_') continue;
         if (brd[col] === brd[col+3] && brd[col] === brd[col+6]) {
             for (var i=0 ; i<3 ; i++) {
-                set_win_on(board_table, i, col);
+                setWinOn(boardTable, i, col);
             }
             return brd[col];
         }
@@ -68,7 +73,7 @@ function check_winner() {
     // first diagonal check
     if (brd[0] !== '_' && brd[0] === brd[4] && brd[0] === brd[8]) {
         for (var i=0 ; i<9 ; i+=4) {
-            set_win_on(board_table, Math.floor(i/3), i % 3);
+            setWinOn(boardTable, Math.floor(i/3), i % 3);
         }
         return brd[0];
     }
@@ -76,7 +81,7 @@ function check_winner() {
     // second diagonal check
     if (brd[2] !== '_' && brd[2] === brd[4] && brd[2] === brd[6]) {
         for (var i=2 ; i<7 ; i+=2) {
-            set_win_on(board_table, Math.floor(i/3), i % 3);
+            setWinOn(boardTable, Math.floor(i/3), i % 3);
         }
         return brd[2];
     }
@@ -84,11 +89,13 @@ function check_winner() {
     return null;
 }
 
-function set_next_player_symbol(symbol) {
-    var next_symbol_img_tag = document.getElementById('next_player_symbol');
-    next_symbol_img_tag.src = next_symbol_img_tag.src.replace(/\w+\.svg/, symbol+'.svg');
+function setNextPlayerSymbol(symbol) {
+    var regex = /\w+\.svg/;
+    var replacement = symbol + '.svg';
+    var nextSymbolImgTag = document.getElementById('next_player_symbol');
+    nextSymbolImgTag.src = nextSymbolImgTag.src.replace(regex, replacement);
 }
 
-function set_win_on(board_table, row, col) {
-    board_table.rows[row].cells[col].classList.add('winning_cell');
+function setWinOn(boardTable, row, col) {
+    boardTable.rows[row].cells[col].classList.add('winning_cell');
 }

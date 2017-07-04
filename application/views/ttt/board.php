@@ -23,7 +23,7 @@
         }
         if (isset($clickable) AND $clickable == TRUE)
         {
-            $format_string = '<img src="/assets/img/%s.svg" onclick="cell_click(this, %d)" />';
+            $format_string = '<img src="/assets/img/%s.svg" onclick="cellClick(this, %d)" />';
         }
         else
         {

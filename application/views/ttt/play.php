@@ -18,8 +18,8 @@
 
             <?php
                 echo form_open('tic-tac-toe/play');
-                echo form_input('board_state', '', ['id' => 'board_state']);
-                echo form_submit('board_submission', 'Board Submission');
+                echo form_input('board_state', '', ['id' => 'board_transcription']);
+                echo form_submit('board_send', 'Board Submission');
                 echo form_close();
             ?>
 
