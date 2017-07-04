@@ -9,32 +9,34 @@ function prepare() {
     window.boardState = new Array(9).fill('_');
     window.nextSymbol = Math.random()<0.5 ? 'x' : 'o';
 
-    var next_symbol_img_tag = document.getElementById('next_player_symbol');
-    next_symbol_img_tag.src = next_symbol_img_tag.src.replace('empty', window.nextSymbol);
-    game_finished = false;
+    set_next_player_symbol(window.nextSymbol);
+    window.game_winner = null;
 }
 
 function cell_click(cell_img_tag, pos) {
-    if (game_finished === true) return;
+    if (window.game_winner !== null) return;
     if (window.boardState[pos] !== '_') return;
 
     var input_tag = document.getElementById('board_state');
 
+    // update internal board state
     window.boardState[pos] = window.nextSymbol;
     input_tag.value = window.boardState.join('');
     cell_img_tag.src = cell_img_tag.src.replace('empty', window.nextSymbol);
     window.nextSymbol = window.nextSymbol==='x' ? 'o' : 'x';
 
-    game_finished = check_board_for_game_end();
+    set_next_player_symbol(window.nextSymbol);
 
-    if (game_finished === true) {
+    window.game_winner = check_winner();
+
+    if (window.game_winner !== null) {
         var button = document.getElementsByName('board_submission')[0];
-        alert(button);
-        button.click();
+        setTimeout(function() { button.click() }, 2000);
+        // TODO: show text about who won; use 'window.game_winner'
     }
 }
 
-function check_board_for_game_end() {
+function check_winner() {
     var board_table = document
         .getElementsByClassName('play-section') [0]
         .getElementsByClassName('board') [0];
@@ -48,7 +50,7 @@ function check_board_for_game_end() {
             for (var i=0 ; i<3 ; i++) {
                 set_win_on(board_table, row, i);
             }
-            return true;
+            return brd[3*row];
         }
     }
 
@@ -59,7 +61,7 @@ function check_board_for_game_end() {
             for (var i=0 ; i<3 ; i++) {
                 set_win_on(board_table, i, col);
             }
-            return true;
+            return brd[col];
         }
     }
 
@@ -68,7 +70,7 @@ function check_board_for_game_end() {
         for (var i=0 ; i<9 ; i+=4) {
             set_win_on(board_table, Math.floor(i/3), i % 3);
         }
-        return true;
+        return brd[0];
     }
 
     // second diagonal check
@@ -76,10 +78,15 @@ function check_board_for_game_end() {
         for (var i=2 ; i<7 ; i+=2) {
             set_win_on(board_table, Math.floor(i/3), i % 3);
         }
-        return true;
+        return brd[2];
     }
 
-    return false;
+    return null;
+}
+
+function set_next_player_symbol(symbol) {
+    var next_symbol_img_tag = document.getElementById('next_player_symbol');
+    next_symbol_img_tag.src = next_symbol_img_tag.src.replace(/\w+\.svg/, symbol+'.svg');
 }
 
 function set_win_on(board_table, row, col) {
