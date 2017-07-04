@@ -9,8 +9,11 @@
                     col-sm-offset-0 col-sm-8">
             <h2>Play</h2>
 
-            Next player:
-            <img src="/assets/img/empty.svg" id="next_player_symbol" name="next_player_symbol" />
+            <div id="board_info">
+                <span id="next_player_label">Next player:</span>
+                <span id="winner_label">Winner:</span>
+                <img src="/assets/img/empty.svg" id="next_player_symbol" name="next_player_symbol" />
+            </div>
 
             <?php
                 $this->load->view('ttt/board', ['clickable' => TRUE]);

@@ -26,18 +26,22 @@ function cellClick(cellImgTag, pos) {
     // update internal board state
     window.boardState[pos] = window.nextSymbol;
     transcriptionTag.value = window.boardState.join('');
-    window.nextSymbol = window.nextSymbol==='x' ? 'o' : 'x';
 
     // update visual board state
     cellImgTag.src = cellImgTag.src.replace('empty', window.nextSymbol);
-    setNextPlayerSymbol(window.nextSymbol);
 
     window.gameWinner = checkWinner();
 
     if (window.gameWinner !== null) {
         var button = document.getElementsByName('board_send')[0];
         setTimeout(function() { button.click() }, NEW_GAME_DELEAY);
-        // TODO: show text about who won; use 'window.gameWinner'
+
+        // show winner text using last shown symbol
+        document.getElementById('board_info').classList.add('text-right');
+    } else {
+        window.nextSymbol = window.nextSymbol==='x' ? 'o' : 'x';
+        setNextPlayerSymbol(window.nextSymbol);
+
     }
 }
 

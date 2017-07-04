@@ -103,3 +103,17 @@ table.board td.winning_cell > div {
     height: 40px;
 }
 
+
+/* show either "next player" or "winner" */
+#next_player_label {
+    display: inline;
+}
+.text-right > span#next_player_label {
+    display: none;
+}
+#winner_label {
+    display: none;
+}
+.text-right > span#winner_label {
+    display: inline;
+}
