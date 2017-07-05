@@ -129,17 +129,11 @@ class Tic_tac_toe extends CI_Controller
             $this->session->set_flashdata('last_error', $msg);
             redirect('tic-tac-toe/begin');
         }
+        $this->session->set_userdata('challenge_string', $challenge_string);
         $data['challenge_string'] = $challenge_string;
 
         $data['title'] = "Play";
         $this->load->view('templates/header', $data);
-
-        $board_state = $this->input->post('board_state');
-        // if just finished a game then save the result
-        if ($board_state !== NULL)
-        {
-            $this->game_model->add_game($challenge_string, $board_state);
-        }
 
         $recent_games = $this->game_model->get_recent_games($challenge_string);
         $data['recent_games'] = $recent_games;
@@ -147,6 +141,28 @@ class Tic_tac_toe extends CI_Controller
         $this->load->view('ttt/play', $data);
 
         $this->load->view('templates/footer');
+    }
+
+    public function submit()
+    {
+        $challenge_string = $this->input->post('challenge_string');
+        $board_state = $this->input->post('board_state');
+
+        if ($board_state === NULL)
+        {
+            $msg = "Cannot save last played game.";
+            $this->session->set_flashdata('last_error', $msg);
+            redirect('tic-tac-toe/play');
+        }
+        if ($challenge_string === NULL)
+        {
+            $msg = 'Can\'t find your session, you must start anew';
+            $this->session->set_flashdata('last_error', $msg);
+            redirect('tic-tac-toe/begin');
+        }
+
+        $this->game_model->add_game($challenge_string, $board_state);
+        redirect('tic-tac-toe/play/' . $challenge_string);
     }
 
     public function results($challenge_string = NULL)
