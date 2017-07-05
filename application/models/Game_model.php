@@ -1,6 +1,6 @@
 <?php
 
-const RECENT_GAMES_LIMIT = 3;
+const RECENT_GAMES_LIMIT = 5;
 
 class Game_model extends CI_Model
 {
