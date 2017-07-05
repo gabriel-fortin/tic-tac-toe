@@ -32,7 +32,7 @@
 
         <!-- Recent boards -->
         <div class="recent-section
-                    col-xs-offset-2 col-xs-8
+                    col-xs-offset-3 col-xs-6
                     col-sm-offset-1 col-sm-3">
             <h3>Recent games</h3>
             <?php
@@ -43,7 +43,15 @@
             ?>
             <div class="text-center">
                 <?php
-                    echo anchor('tic-tac-toe/results/' . $challenge_string, 'see all games →');
+                    if (empty($recent_games))
+                    {
+                        echo 'no recent games';
+                    }
+                    else
+                    {
+                        echo anchor('tic-tac-toe/results/' . $challenge_string,
+                            '&nbsp;&nbsp;&nbsp;see all games →');
+                    }
                 ?>
             </div>
         </div>

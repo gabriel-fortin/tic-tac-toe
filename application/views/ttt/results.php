@@ -1,14 +1,15 @@
 
 <div class="container">
-    <span style="margin: 10px;">
-        Go back to <?php echo anchor('tic-tac-toe/play/'.$challenge_string, 'playing'); ?>
-    </span>
-
     <?php
         if (empty($all_games))
         {
-            echo 'You have no results yet.';
-            echo 'Go to ' . anchor('time-tac-toe/play/' . $challenge_string, 'play');
+            $a = anchor('tic-tac-toe/play/' . $challenge_string, 'playing');
+            echo 'You have no results yet. Go to ' . $a;
+        }
+        else
+        {
+            $a = anchor('tic-tac-toe/play/'.$challenge_string, 'playing');
+            echo '<div> Go back to ' . $a . '</div>';
         }
     ?>
     <div class="row">
