@@ -8,7 +8,7 @@
         if (empty($all_games))
         {
             echo 'You have no results yet.';
-            echo 'Go to ' . anchor('time-tac-toe/play/' . $challenge_string, play);
+            echo 'Go to ' . anchor('time-tac-toe/play/' . $challenge_string, 'play');
         }
     ?>
     <div class="row">
