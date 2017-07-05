@@ -1,6 +1,6 @@
 <?php
 
-const RECENT_GAMES_LIMIT = 5;
+const RECENT_GAMES_LIMIT = 3;
 
 class Game_model extends CI_Model
 {
@@ -40,9 +40,24 @@ class Game_model extends CI_Model
     /**
      * Returns an array of board states for a few recent games.
      * @param $challenge_string string public id of the challenge for which to grab data
-     * @return array an array of strings representing a board's state
+     * @return array an array of strings representing boards' states
      */
     public function get_recent_games($challenge_string)
+    {
+        return $this->_get_games($challenge_string, 'LIMIT '.RECENT_GAMES_LIMIT);
+    }
+
+    /**
+     * Returns an array of board states for all games for given challenge.
+     * @param $challenge_string string public id of the challenge for which to grab data
+     * @return array an array of strings representing boards' states
+     */
+    public function get_all_games($challenge_string)
+    {
+        return $this->_get_games($challenge_string, '');
+    }
+
+    private function _get_games($challenge_string, $sql_limit_string)
     {
         $sql = sprintf(
         "SELECT board_state
@@ -53,9 +68,9 @@ class Game_model extends CI_Model
                       WHERE string_id = '%s'
                 )
                 ORDER BY `timestamp` DESC
-                LIMIT %d",
+                %s",
                 $challenge_string,
-                RECENT_GAMES_LIMIT);
+                $sql_limit_string);
         $query = $this->db->query($sql);
 
         // extract strings from query

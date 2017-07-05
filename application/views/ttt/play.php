@@ -39,8 +39,10 @@
                     $this->load->view('ttt/board', ['board_state' => $game, 'clickable' => FALSE]);
                 }
             ?>
-            <div>
-                see all games →
+            <div class="text-center">
+                <?php
+                    echo anchor('tic-tac-toe/results/' . $challenge_string, 'see all games →');
+                ?>
             </div>
         </div>
 

@@ -21,8 +21,6 @@ class Tic_tac_toe extends CI_Controller
 
     public function begin()
     {
-
-
         // if form is filled correctly then go to PLAY
         // this is the most common scenario
         $this->validation_passed = $this->_perform_validation();
@@ -111,8 +109,6 @@ class Tic_tac_toe extends CI_Controller
         $player1 = $this->input->post('player1');
         $player2 = $this->input->post('player2');
 
-
-
         $challenge_string = $this->challenge_model->create_challenge($player1, $player2);
         $this->session->set_userdata('challenge_string', $challenge_string);
 
@@ -150,6 +146,34 @@ class Tic_tac_toe extends CI_Controller
 
         $this->load->view('ttt/play', $data);
 
+        $this->load->view('templates/footer');
+    }
+
+    public function results($challenge_string = NULL)
+    {
+        if ($challenge_string === NULL)
+        {
+            // try to get one from session
+            $challenge_string = $this->session->userdata('challenge_string');
+        }
+        if ($challenge_string === NULL)
+        {
+            $msg = "The requested results' page cannot be found.";
+            $this->session->set_flashdata('last_error', $msg);
+            redirect('tic-tac-toe/begin');
+        }
+        $this->session->set_userdata('challenge_string', $challenge_string);
+
+        $all_boards = $this->game_model->get_all_games($challenge_string);
+
+        $data = array(
+            'title' => 'Results',
+            'all_games' => $all_boards,
+            'challenge_string' => $challenge_string,
+        );
+
+        $this->load->view('templates/header', $data);
+        $this->load->view(  'ttt/results', $data);
         $this->load->view('templates/footer');
     }
 }

@@ -55,5 +55,6 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['tic-tac-toe'] = 'Tic_tac_toe/begin';
 $route['tic-tac-toe/play/(:any)'] = 'Tic_tac_toe/play/$1';
+$route['tic-tac-toe/results/(:any)'] = 'Tic_tac_toe/results/$1';
 $route['tic-tac-toe/(:any)'] = 'Tic_tac_toe/$1';
 $route['ttt/(:any)'] = 'Tic_tac_toe/$1';

@@ -133,3 +133,10 @@ table.board td.winning_cell > div {
     margin: 10px 0px;
     padding: 10px;
 }
+
+
+/* for the 'results' page */
+.board-in-results {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
