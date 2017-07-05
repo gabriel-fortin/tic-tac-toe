@@ -132,6 +132,10 @@ class Tic_tac_toe extends CI_Controller
         $this->session->set_userdata('challenge_string', $challenge_string);
         $data['challenge_string'] = $challenge_string;
 
+        $players = $this->challenge_model->get_player_names($challenge_string);
+        $data['player1'] = $players['player1'];
+        $data['player2'] = $players['player2'];
+
         $data['title'] = "Play";
         $this->load->view('templates/header', $data);
 

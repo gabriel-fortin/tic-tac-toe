@@ -41,7 +41,6 @@ function cellClick(cellImgTag, pos) {
     } else {
         window.nextSymbol = window.nextSymbol==='x' ? 'o' : 'x';
         setNextPlayerSymbol(window.nextSymbol);
-
     }
 }
 
@@ -98,6 +97,11 @@ function setNextPlayerSymbol(symbol) {
     var replacement = symbol + '.svg';
     var nextSymbolImgTag = document.getElementById('next_player_symbol');
     nextSymbolImgTag.src = nextSymbolImgTag.src.replace(regex, replacement);
+
+    var playerNameTag = document.getElementById('player_name_' + symbol);
+    var otherPlayerTag = document.getElementById('player_name_' + (symbol==='x'?'o':'x'));
+    otherPlayerTag.classList.add('invisible');
+    playerNameTag.classList.remove('invisible');
 }
 
 function setWinOn(boardTable, row, col) {

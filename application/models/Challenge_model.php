@@ -29,6 +29,19 @@ class Challenge_model extends CI_Model
         return $challenge_string;
     }
 
+    public function get_player_names($challenge_string)
+    {
+        $sql = sprintf("
+            SELECT player1, player2
+            FROM challenge
+            WHERE string_id = '%s'",
+            $challenge_string);
+
+        $query = $this->db->query($sql);
+
+        return $query->row_array();
+    }
+
     // I'm not taking care of removing unused 'challenge' entries because
     // it's irrelevant from a UX point of view.
 
