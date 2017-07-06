@@ -129,6 +129,11 @@ table.board td.winning_cell > div {
 }
 
 
+input.ai_checkbox {
+    margin-left: 50px;
+}
+
+
 .symbol_and_player {
     border: solid #ccc 1px;
     display: inline-block;

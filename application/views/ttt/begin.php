@@ -22,6 +22,8 @@
     <br />
 
     <?php echo form_label('Player 2', 'player2') ?>
+    <?php echo form_checkbox('ai', 'yes', FALSE, 'class="ai_checkbox"'); ?>
+    <span>play versus AI</span>
     <br />
     <?php echo form_input(array(
             'name' => 'player2',

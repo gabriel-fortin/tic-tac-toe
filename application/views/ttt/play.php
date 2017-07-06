@@ -9,6 +9,10 @@
                     col-sm-offset-0 col-sm-8">
             <h2>Play</h2>
 
+            <div id="ai_info" class="text-center <?php echo ($ai===TRUE ? '' : 'invisible') ?>">
+                playing versus AI
+            </div>
+
             <div id="board_info">
                 <span id="next_player_label">Next player:</span>
                 <span id="winner_label">Winner:</span>

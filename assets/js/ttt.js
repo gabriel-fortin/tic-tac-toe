@@ -113,14 +113,13 @@ function setNextPlayerSymbol(symbol) {
     otherPlayerTag.classList.add('invisible');
     playerNameTag.classList.remove('invisible');
 
-    if (IsAiEnabled() && symbol === 'o') {
+    if (isAiEnabled() && symbol === 'o') {
         computeAndPerformAiMove();
     }
 }
 
-function IsAiEnabled() {
-    // TODO: add some logic
-    return false;
+function isAiEnabled() {
+    return ! document.getElementById('ai_info').classList.contains('invisible');
 }
 
 function computeAndPerformAiMove() {
@@ -132,16 +131,16 @@ function computeAndPerformAiMove() {
     }
 
     if (movesCount === 0) {
-        performAiMove(0, 0);
+        performAiMove(0);
         return;
     }
 
     // play in middle if possible
     if (movesCount === 1) {
         if (brd[4] === '_') {
-            performAiMove(1, 1);
+            performAiMove(4);
         } else {
-            performAiMove(0, 0);
+            performAiMove(0);
         }
         return;
     }
@@ -199,7 +198,9 @@ function performAiMove(pos) {
         .getElementsByClassName('board') [0];
 
     var imgTag = boardTable.rows[Math.floor(pos/3)].cells[pos%3].getElementsByTagName('img')[0]
-    imgTag.click();
+    setTimeout(function () {
+        imgTag.click();
+    }, 100);
 }
 
 function markWinOn(boardTable, row, col) {

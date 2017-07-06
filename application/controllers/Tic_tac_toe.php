@@ -108,9 +108,11 @@ class Tic_tac_toe extends CI_Controller
     {
         $player1 = $this->input->post('player1');
         $player2 = $this->input->post('player2');
+        $ai = $this->input->post('ai') !== NULL;
 
         $challenge_string = $this->challenge_model->create_challenge($player1, $player2);
         $this->session->set_userdata('challenge_string', $challenge_string);
+        $this->session->set_userdata('ai', $ai);
 
         $this->session->keep_flashdata('last_error');
         redirect('tic-tac-toe/play/'.$challenge_string);
@@ -135,6 +137,7 @@ class Tic_tac_toe extends CI_Controller
         $players = $this->challenge_model->get_player_names($challenge_string);
         $data['player1'] = $players['player1'];
         $data['player2'] = $players['player2'];
+        $data['ai'] = $this->session->userdata('ai');
 
         $data['title'] = "Play";
         $this->load->view('templates/header', $data);
