@@ -1,5 +1,6 @@
 
 <div class="container">
+    <h2 class="text-center">Results</h2>
     <?php
         if (empty($all_games))
         {

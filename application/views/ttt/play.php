@@ -32,6 +32,10 @@
                 echo form_close();
             ?>
 
+            <div class="text-center">
+                Want to start a <?php echo anchor('tic-tac-toe/begin', 'new session') ?>?
+            </div>
+
         </div>
 
         <!-- Recent boards -->
