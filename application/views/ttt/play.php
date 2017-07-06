@@ -14,8 +14,8 @@
                 <span id="winner_label">Winner:</span>
                 <span class="symbol_and_player">
                     <img id="next_player_symbol" name="next_player_symbol" src="/assets/img/empty.svg" />
-                    <span id="player_name_x"><?php echo $player1 ?></span>
-                    <span id="player_name_o"><?php echo $player2 ?></span>
+                    <span id="player_name_x" class="invisible"><?php echo $player1 ?></span>
+                    <span id="player_name_o" class="invisible"><?php echo $player2 ?></span>
                 </span>
             </div>
 

@@ -40,7 +40,7 @@
             <div> <?php echo $mapping[$pos++]; ?> </div>
         </td>
         <td class="top-edge">
-            <div class=""> <?php echo $mapping[$pos++]; ?> </div>
+            <div> <?php echo $mapping[$pos++]; ?> </div>
         </td>
         <td class="right-edge top-edge">
             <div> <?php echo $mapping[$pos++]; ?> </div>
