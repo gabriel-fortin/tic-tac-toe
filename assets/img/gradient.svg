@@ -5,8 +5,8 @@
 
     <defs>
         <radialGradient id="radialGradient">
-            <stop offset="0%" stop-color="#AAC8B4"/>
-            <stop offset="100%" stop-color="#AAC8B400"/>
+            <stop offset="0%" stop-color="#AAAAAA"/>
+            <stop offset="100%" stop-color="#AAAAAA00"/>
         </radialGradient>
         <radialGradient id="RadialGradient2" cx="0.25" cy="0.25" r="0.25">
             <stop offset="0%" stop-color="red"/>

@@ -24,7 +24,7 @@ table.board td > div {
     bottom: 0;
     left: 0;
     right: 0;
-    /* grid's thickness */
+    /* grid's thickness – relative to board's size */
     margin: 3%;
     /* cell's normal background */
     background: white;
@@ -59,7 +59,9 @@ table.board td.bottom-edge > div {
 
 /* highlight for winning cells */
 table.board td.winning_cell > div {
-    background-size: 100%;
+    background: none;
+}
+table.board td.winning_cell > div > img {
     background: url("/assets/img/gradient.svg") no-repeat center;
-    color: #77c791;
+    background-size: 100%;
 }
