@@ -9,17 +9,17 @@
                     col-sm-offset-0 col-sm-8">
             <h2>Play</h2>
 
-            <div id="ai_info" class="text-center <?php echo ($ai===TRUE ? '' : 'invisible') ?>">
+            <div id="ai-info" class="text-center <?php echo ($ai===TRUE ? '' : 'invisible') ?>">
                 playing versus AI
             </div>
 
-            <div id="board_info">
-                <span id="next_player_label">Next player:</span>
-                <span id="winner_label">Winner:</span>
-                <span class="next_player_symbol_and_name">
-                    <img id="next_player_symbol" name="next_player_symbol" src="/assets/img/empty.svg" />
-                    <span id="player_name_x" class="invisible"><?php echo $player1 ?></span>
-                    <span id="player_name_o" class="invisible"><?php echo $player2 ?></span>
+            <div id="board-info">
+                <span id="next-player-label">Next player:</span>
+                <span id="winner-label">Winner:</span>
+                <span class="next-player-symbol-and-name">
+                    <img id="next-player-symbol" name="next-player-symbol" src="/assets/img/empty.svg" />
+                    <span id="player-name-x" class="invisible"><?php echo $player1 ?></span>
+                    <span id="player-name-o" class="invisible"><?php echo $player2 ?></span>
                 </span>
             </div>
 
@@ -31,8 +31,8 @@
                 echo form_open('tic-tac-toe/submit',
                     ['class' => 'invisible'],
                     ['challenge_string' => $challenge_string]);
-                echo form_input('board_state', '', ['id' => 'board_transcription']);
-                echo form_submit('board_send', 'Board Submission');
+                echo form_input('board_state', '', ['id' => 'board-transcription']);
+                echo form_submit('board-send', 'Board Submission');
                 echo form_close();
             ?>
 

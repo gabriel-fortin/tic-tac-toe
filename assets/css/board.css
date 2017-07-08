@@ -58,10 +58,10 @@ table.board td.bottom-edge > div {
 
 
 /* highlight for winning cells */
-table.board td.winning_cell > div {
+table.board td.winning-cell > div {
     background: none;
 }
-table.board td.winning_cell > div > img {
+table.board td.winning-cell > div > img {
     background: url("/assets/img/gradient.svg") no-repeat center;
     background-size: 100%;
 }

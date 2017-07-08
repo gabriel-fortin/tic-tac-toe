@@ -21,7 +21,7 @@ function cellClick(cellImgTag, pos) {
     // no moves on occupied cells
     if (window.boardState[pos] !== '_') return;
 
-    var transcriptionTag = document.getElementById('board_transcription');
+    var transcriptionTag = document.getElementById('board-transcription');
 
     // update internal board state
     window.boardState[pos] = window.nextSymbol;
@@ -33,16 +33,16 @@ function cellClick(cellImgTag, pos) {
     window.gameWinner = checkWinner(window.boardState, true);
 
     if (window.gameWinner !== null) {
-        var button = document.getElementsByName('board_send')[0];
+        var button = document.getElementsByName('board-send')[0];
         setTimeout(function() { button.click() }, NEW_GAME_DELEAY);
 
         // show winner text using last shown symbol
         if (window.gameWinner !== '_') {
-            document.getElementById('board_info').classList.add('text-right');
+            document.getElementById('board-info').classList.add('text-right');
         } else {
             var nextPlayerTag = document
                 .getElementsByClassName('play-section') [0]
-                .getElementsByClassName('symbol_and_player') [0];
+                .getElementsByClassName('symbol-and-player') [0];
             nextPlayerTag.classList.add('invisible');
         }
     } else {
@@ -105,11 +105,11 @@ function checkWinner(brd, shouldMark) {
 function setNextPlayerSymbol(symbol) {
     var regex = /\w+\.svg/;
     var replacement = symbol + '.svg';
-    var nextSymbolImgTag = document.getElementById('next_player_symbol');
+    var nextSymbolImgTag = document.getElementById('next-player-symbol');
     nextSymbolImgTag.src = nextSymbolImgTag.src.replace(regex, replacement);
 
-    var playerNameTag = document.getElementById('player_name_' + symbol);
-    var otherPlayerTag = document.getElementById('player_name_' + (symbol==='x'?'o':'x'));
+    var playerNameTag = document.getElementById('player-name-' + symbol);
+    var otherPlayerTag = document.getElementById('player-name-' + (symbol==='x'?'o':'x'));
     otherPlayerTag.classList.add('invisible');
     playerNameTag.classList.remove('invisible');
 
@@ -119,7 +119,7 @@ function setNextPlayerSymbol(symbol) {
 }
 
 function isAiEnabled() {
-    return ! document.getElementById('ai_info').classList.contains('invisible');
+    return ! document.getElementById('ai-info').classList.contains('invisible');
 }
 
 function computeAndPerformAiMove() {
@@ -197,12 +197,12 @@ function performAiMove(pos) {
         .getElementsByClassName('play-section') [0]
         .getElementsByClassName('board') [0];
 
-    var imgTag = boardTable.rows[Math.floor(pos/3)].cells[pos%3].getElementsByTagName('img')[0]
+    var imgTag = boardTable.rows[Math.floor(pos/3)].cells[pos%3].getElementsByTagName('img')[0];
     setTimeout(function () {
         imgTag.click();
     }, 100);
 }
 
 function markWinOn(boardTable, row, col) {
-    boardTable.rows[row].cells[col].classList.add('winning_cell');
+    boardTable.rows[row].cells[col].classList.add('winning-cell');
 }

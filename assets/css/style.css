@@ -41,13 +41,13 @@ body {
 }
 
 /* x/o symbol for next player */
-#next_player_symbol {
+#next-player-symbol {
     width: 40px;
     height: 40px;
 }
 
 /* box containing next player's symbol and name */
-.next_player_symbol_and_name {
+.next-player-symbol-and-name {
     border: solid #ccc 1px;
     display: inline-block;
     padding-right: 8px;
@@ -55,21 +55,21 @@ body {
 }
 
 /* toggling the visibility "next player" and "winner" labels */
-#next_player_label {
+#next-player-label {
     display: inline;
 }
-.text-right > span#next_player_label {
+.text-right > span#next-player-label {
     display: none;
 }
-#winner_label {
+#winner-label {
     display: none;
 }
-.text-right > span#winner_label {
+.text-right > span#winner-label {
     display: inline;
 }
 
 /* submitting game results is hidden from user */
-#board_transcription, #board_submit {
+#board-transcription, #board-submit {
     display: none;
 }
 
@@ -91,8 +91,8 @@ body {
 
 
 
-
-input.ai_checkbox {
+/* 'begin' page */
+input.ai-checkbox {
     margin-left: 50px;
 }
 
