@@ -7,7 +7,12 @@
         echo '<script type="text/javascript" src="' . $src . '"></script>'
     ?>
 
-    <?php echo link_tag('assets/css/style.css', 'stylesheet') ?>
+    <?php
+        foreach ($css_files as $css)
+        {
+            echo link_tag('assets/css/' . $css . '.css', 'stylesheet');
+        }
+    ?>
 
     <?php
         $src = base_url("assets/js/ttt.js");
