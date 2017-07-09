@@ -15,7 +15,7 @@
     ?>
     <div class="row">
         <?php foreach ($all_games as $game): ?>
-            <div class="board-in-results col-xs-6 col-sm-4 col-md-3">
+            <div class="board-item col-xs-6 col-sm-4 col-md-3">
                 <?php $this->load->view('ttt/board', ['board_state' => $game, 'clickable' => FALSE]); ?>
             </div>
         <?php endforeach; ?>

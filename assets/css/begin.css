@@ -1,0 +1,10 @@
+
+.error-message {
+    color: #d9534f;
+    margin: 10px 0px;
+    padding: 10px;
+}
+
+input.ai-checkbox {
+    margin-left: 50px;
+}

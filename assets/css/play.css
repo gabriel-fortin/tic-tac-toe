@@ -1,29 +1,4 @@
 
-/*****  general settings  *****/
-
-body {
-    padding:20px;
-}
-
-/* error messages on the 'begin' page */
-.error-message {
-    color: #d9534f;
-    margin: 10px 0px;
-    padding: 10px;
-}
-
-/* 'results' page */
-.board-in-results {
-    margin-top: 20px;
-    margin-bottom: 60px;
-}
-
-/* handy class for hiding things */
-.invisible {
-    display: none;
-}
-
-
 /*****  play section  *****/
 
 /* play section – general */
@@ -86,15 +61,3 @@ body {
     text-align: center;
     margin: 1em;
 }
-
-
-
-
-
-/* 'begin' page */
-input.ai-checkbox {
-    margin-left: 50px;
-}
-
-
-

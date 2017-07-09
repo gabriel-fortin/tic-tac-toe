@@ -38,7 +38,7 @@ class Tic_tac_toe extends CI_Controller
         $this->_check_form();
 
         $data['title'] = 'Players\' selection';
-        $data['css_files'] = ['board', 'style'];
+        $data['css_files'] = ['base', 'begin'];
 
         // prepare all sections of page
         $this->load->view('templates/header', $data);
@@ -139,7 +139,7 @@ class Tic_tac_toe extends CI_Controller
         $data['player1'] = $players['player1'];
         $data['player2'] = $players['player2'];
         $data['ai'] = $this->session->userdata('ai');
-        $data['css_files'] = ['board', 'style'];
+        $data['css_files'] = ['board', 'base', 'play'];
 
         $data['title'] = "Play";
         $this->load->view('templates/header', $data);
@@ -195,7 +195,7 @@ class Tic_tac_toe extends CI_Controller
             'title' => 'Results',
             'all_games' => $all_boards,
             'challenge_string' => $challenge_string,
-            'css_files' => ['board', 'style'],
+            'css_files' => ['board', 'base', 'results'],
         );
 
         $this->load->view('templates/header', $data);

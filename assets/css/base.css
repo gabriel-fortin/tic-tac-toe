@@ -1,0 +1,11 @@
+
+/*****  general settings  *****/
+
+body {
+    padding:20px;
+}
+
+/* handy class for hiding things */
+.invisible {
+    display: none;
+}
