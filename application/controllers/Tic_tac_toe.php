@@ -37,8 +37,9 @@ class Tic_tac_toe extends CI_Controller
         // then make sure an error message will be shown
         $this->_check_form();
 
-        $data['title'] = 'Players\' selection';
-        $data['css_files'] = ['base', 'begin'];
+        $data = array(
+            'css_files' => ['base', 'begin'],
+        );
 
         // prepare all sections of page
         $this->load->view('templates/header', $data);
@@ -132,23 +133,23 @@ class Tic_tac_toe extends CI_Controller
             $this->session->set_flashdata('last_error', $msg);
             redirect('tic-tac-toe/begin');
         }
+
         $this->session->set_userdata('challenge_string', $challenge_string);
-        $data['challenge_string'] = $challenge_string;
 
         $players = $this->challenge_model->get_player_names($challenge_string);
-        $data['player1'] = $players['player1'];
-        $data['player2'] = $players['player2'];
-        $data['ai'] = $this->session->userdata('ai');
-        $data['css_files'] = ['board', 'base', 'play'];
-
-        $data['title'] = "Play";
-        $this->load->view('templates/header', $data);
-
         $recent_games = $this->game_model->get_recent_games($challenge_string);
-        $data['recent_games'] = $recent_games;
 
+        $data = array(
+            'challenge_string' => $challenge_string,
+            'player1' => $players['player1'],
+            'player2' => $players['player2'],
+            'ai' => $this->session->userdata('ai'),
+            'css_files' => ['board', 'base', 'play'],
+            'recent_games' => $recent_games,
+        );
+        
+        $this->load->view('templates/header', $data);
         $this->load->view('ttt/play', $data);
-
         $this->load->view('templates/footer');
     }
 
@@ -187,12 +188,12 @@ class Tic_tac_toe extends CI_Controller
             $this->session->set_flashdata('last_error', $msg);
             redirect('tic-tac-toe/begin');
         }
+
         $this->session->set_userdata('challenge_string', $challenge_string);
 
         $all_boards = $this->game_model->get_all_games($challenge_string);
 
         $data = array(
-            'title' => 'Results',
             'all_games' => $all_boards,
             'challenge_string' => $challenge_string,
             'css_files' => ['board', 'base', 'results'],
