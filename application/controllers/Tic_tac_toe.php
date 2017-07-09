@@ -8,7 +8,6 @@ class Tic_tac_toe extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // TODO: load libraries/helpers/models only when they are needed? (performance?)
         $this->load->library('form_validation');
         $this->load->library('session');
         $this->load->helper('string');

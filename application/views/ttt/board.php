@@ -1,7 +1,6 @@
 
 <?php
     if ( ! isset($board_state)) {
-        // TODO: change to '_________'
         $board_state = '_________';
     }
 
