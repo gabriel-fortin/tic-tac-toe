@@ -12,28 +12,29 @@ class Util
     /**
      * @param $challenge_string string as got from GET
      * @param $error_msg string used if challenge string cannot be returned
-     * @return string challenge string, never NULL
+     * @return string challenge string; on failure performs a redirect
      */
     function challenge_string_or_redirect($challenge_string, $error_msg)
     {
-        $this->load->library('session');
+        $this->CI->load->library('session');
+        $this->CI->load->model('challenge_model');
 
-        if ($challenge_string === NULL)
-        {
-            // try to get one from session
-            $challenge_string = $this->session->userdata('challenge_string');
-        }
-        if ($challenge_string === NULL)
-        {
-            $this->load->helper('url');
+        $session_challenge_string = $this->CI->session->userdata('challenge_string');
 
-            $this->session->set_flashdata('last_error', $error_msg);
+        // first, verify that string is valid
+        $verified_string = $this->CI->challenge_model->confirm_challenge_string($challenge_string, $session_challenge_string);
+
+        if ($verified_string === NULL)
+        {
+            $this->CI->load->helper('url');
+
+            $this->CI->session->set_flashdata('last_error', $error_msg);
             redirect('tic-tac-toe/begin');
         }
 
-        // can be helpful later
-        $this->session->set_userdata('challenge_string', $challenge_string);
+        // can be useful later
+        $this->CI->session->set_userdata('challenge_string', $verified_string);
 
-        return $challenge_string;
+        return $verified_string;
     }
 }
