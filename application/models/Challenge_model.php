@@ -31,13 +31,12 @@ class Challenge_model extends CI_Model
 
     public function get_player_names($challenge_string)
     {
-        $sql = sprintf("
-            SELECT player1, player2
+        $sql =
+            'SELECT player1, player2
             FROM challenge
-            WHERE string_id = '%s'",
-            $challenge_string);
+            WHERE string_id = ?';
 
-        $query = $this->db->query($sql);
+        $query = $this->db->query($sql, [$challenge_string]);
 
         return $query->row_array();
     }

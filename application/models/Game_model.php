@@ -28,12 +28,12 @@ class Game_model extends CI_Model
 
     private function _challenge_id_for($challenge_string)
     {
-        $sql = sprintf(
-            "SELECT id
-                FROM challenge
-                WHERE string_id='%s'",
-            $challenge_string);
-        $query = $this->db->query($sql);
+        $sql =
+            'SELECT id
+            FROM challenge
+            WHERE string_id = ?';
+        $query = $this->db->query($sql, [$challenge_string]);
+        print_r($query);
         return $query->row()->id;
     }
 
@@ -60,18 +60,17 @@ class Game_model extends CI_Model
     private function _get_games($challenge_string, $sql_limit_string)
     {
         $sql = sprintf(
-        "SELECT board_state
+            "SELECT board_state
                 FROM game
                 WHERE challenge_id IN (
                       SELECT id
                       FROM challenge
-                      WHERE string_id = '%s'
+                      WHERE string_id = ?
                 )
                 ORDER BY `timestamp` DESC
                 %s",
-                $challenge_string,
                 $sql_limit_string);
-        $query = $this->db->query($sql);
+        $query = $this->db->query($sql, [$challenge_string]);
 
         // extract strings from query
         $board_strings = array();
