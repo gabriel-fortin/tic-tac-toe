@@ -11,6 +11,7 @@ class Tic_tac_toe extends CI_Controller
         $this->load->library('form_validation');
         $this->load->library('session');
         $this->load->helper('string');
+        $this->load->helper('array');
         $this->load->helper('html');
         $this->load->helper('form');
         $this->load->helper('url');
@@ -39,6 +40,7 @@ class Tic_tac_toe extends CI_Controller
         $this->_check_form();
 
         $data = array(
+            'validation_error_array' => $this->form_validation->error_array(),
             'css_files' => ['base', 'begin'],
         );
 

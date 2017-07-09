@@ -4,41 +4,43 @@
 
 <h3>Who will play?</h3>
 
-
 <?php echo form_open('tic-tac-toe/begin'); ?>
 
+    <div class="form-group <?php if (element('player1', $validation_error_array) !== NULL) {echo 'has-error';} ?>">
+        <?php echo form_label('Player 1', 'player1', ['class' => 'control-label']) ?>
 
-    <?php echo form_label('Player 1', 'player1') ?>
-    <br />
-    <?php /*echo form_input('player1', $player1)*/ ?>
-    <?php echo form_input(array(
-            'name' => 'player1',
-            'value' => set_value('player1', ''),
-            'id' => 'player1',
-            'class' => 'form-control',
-            'placeholder' => 'enter name',
-    )) ?>
+        <br />
 
-    <br />
+        <?php echo form_input(array(
+                'name' => 'player1',
+                'value' => set_value('player1', ''),
+                'id' => 'player1',
+                'class' => 'form-control',
+                'placeholder' => 'enter name',
+        )) ?>
+    </div>
 
-    <?php echo form_label('Player 2', 'player2') ?>
+    <div class="form-group <?php if (element('player2', $validation_error_array) !== NULL) {echo 'has-error';} ?>">
+        <?php echo form_label('Player 2', 'player2', ['class' => 'control-label']) ?>
+        <br />
+
+        <?php echo form_input(array(
+                'name' => 'player2',
+                'value' => set_value('player2', ''),
+                'id' => 'player2',
+                'class' => 'form-control',
+                'placeholder' => 'enter name',
+        )) ?>
+    </div>
+
     <?php echo form_checkbox('ai', 'yes', FALSE, 'class="ai-checkbox"'); ?>
     <span>play versus AI</span>
-    <br />
-    <?php echo form_input(array(
-            'name' => 'player2',
-            'value' => set_value('player2', ''),
-            'id' => 'player2',
-            'class' => 'form-control',
-            'placeholder' => 'enter name',
-    )) ?>
 
-    <br />
-
-    <?php echo form_submit('submit', 'Play!', ['class' => 'btn btn-primary']) ?>
+    <div class="form-group">
+        <?php echo form_submit('submit', 'Play!', ['class' => 'btn btn-primary']) ?>
+    </div>
 
 <?php echo form_close() ?>
-
 
 </div>
 </div>
