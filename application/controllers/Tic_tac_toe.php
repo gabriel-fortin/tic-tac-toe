@@ -17,6 +17,8 @@ class Tic_tac_toe extends CI_Controller
         $this->load->helper('url');
         $this->load->model('challenge_model');
         $this->load->model('game_model');
+
+        $this->load->library('util');
     }
 
     public function begin()
@@ -123,7 +125,7 @@ class Tic_tac_toe extends CI_Controller
     public function play($challenge_string = NULL)
     {
         $error_msg = 'Can\'t find your session, you must start anew';
-        $challenge_string = $this->_challenge_string_or_redirect($challenge_string, $error_msg);
+        $challenge_string = $this->util->challenge_string_or_redirect($challenge_string, $error_msg);
 
         $players = $this->challenge_model->get_player_names($challenge_string);
         $recent_games = $this->game_model->get_recent_games($challenge_string);
@@ -154,7 +156,7 @@ class Tic_tac_toe extends CI_Controller
             redirect('tic-tac-toe/play');
         }
         $error_msg = 'Can\'t find your session, you must start anew';
-        $challenge_string = $this->_challenge_string_or_redirect($challenge_string, $error_msg);
+        $challenge_string = $this->util->challenge_string_or_redirect($challenge_string, $error_msg);
 
         $this->game_model->add_game($challenge_string, $board_state);
         redirect('tic-tac-toe/play/' . $challenge_string);
@@ -163,7 +165,7 @@ class Tic_tac_toe extends CI_Controller
     public function results($challenge_string = NULL)
     {
         $error_msg = "The requested results' page cannot be found.";
-        $challenge_string = $this->_challenge_string_or_redirect($challenge_string, $error_msg);
+        $challenge_string = $this->util->challenge_string_or_redirect($challenge_string, $error_msg);
 
         $all_boards = $this->game_model->get_all_games($challenge_string);
 
@@ -177,28 +179,5 @@ class Tic_tac_toe extends CI_Controller
         $this->load->view('ttt/results', $data);
         $this->load->view('templates/footer');
     }
-
-    /**
-     * @param $challenge_string string as got from GET
-     * @param $error_msg string used if challenge string cannot be returned
-     * @return string challenge string, never NULL
-     */
-    private function _challenge_string_or_redirect($challenge_string, $error_msg)
-    {
-        if ($challenge_string === NULL)
-        {
-            // try to get one from session
-            $challenge_string = $this->session->userdata('challenge_string');
-        }
-        if ($challenge_string === NULL)
-        {
-            $this->session->set_flashdata('last_error', $error_msg);
-            redirect('tic-tac-toe/begin');
-        }
-
-        // can be helpful later
-        $this->session->set_userdata('challenge_string', $challenge_string);
-
-        return $challenge_string;
-    }
+    
 }
