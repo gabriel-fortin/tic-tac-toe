@@ -1,7 +1,9 @@
 
 CREATE DATABASE main_db;
-
 USE main_db;
+
+CREATE USER 'cake'@'localhost' IDENTIFIED BY 'the cake is a lie';
+GRANT ALL PRIVILEGES ON main_db.* TO 'cake'@'localhost';
 
 CREATE TABLE challenge (
     id int NOT NULL AUTO_INCREMENT,
